@@ -36,6 +36,7 @@ Updated driver to use INDI::Telescope (JM)
 #include "lx200ap_gtocp2.h"
 #include "lx200classic.h"
 #include "lx200fs2.h"
+#include "lx200lfep.h"
 #include "lx200gemini.h"
 #include "lx200pulsar2.h"
 #include "lx200ss2000pc.h"
@@ -134,6 +135,11 @@ static class Loader
             {
                 IDLog("initializing from Astro-Electronic FS-2...\n");
                 telescope.reset(new LX200FS2());
+            }
+            else if (strstr(__progname, "indi_lx200lfep"))
+            {
+            	IDLog("initializing from LittleFoot Elegance Photo device...\n");
+            	telescope.reset(new LX200LFEP());	
             }
             else if (strstr(__progname, "indi_lx200_10micron"))
             {

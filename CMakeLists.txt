@@ -656,6 +656,7 @@ SET(lx200generic_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/drivers/telescope/lx200ap.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/drivers/telescope/lx200ap_gtocp2.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/drivers/telescope/lx200fs2.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/drivers/telescope/lx200lfep.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/drivers/telescope/lx200ss2000pc.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/drivers/telescope/lx200_OnStep.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/drivers/telescope/lx200_10micron.cpp
@@ -688,6 +689,7 @@ exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV
 exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV{DESTDIR}${BIN_INSTALL_DIR}/indi_lx200gotonova)\n
 exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV{DESTDIR}${BIN_INSTALL_DIR}/indi_lx200pulsar2)\n
 exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV{DESTDIR}${BIN_INSTALL_DIR}/indi_lx200fs2)\n
+exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV{DESTDIR}${BIN_INSTALL_DIR}/indi_lx200lfep)\n
 exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV{DESTDIR}${BIN_INSTALL_DIR}/indi_lx200ss2000pc)\n
 exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV{DESTDIR}${BIN_INSTALL_DIR}/indi_lx200_OnStep)\n
 exec_program(\"${CMAKE_COMMAND}\" ARGS -E create_symlink indi_lx200generic \$ENV{DESTDIR}${BIN_INSTALL_DIR}/indi_lx200_10micron)\n
@@ -1748,6 +1750,18 @@ add_executable(indi_usbdewpoint ${usb_dewpoint_SRC})
 target_link_libraries(indi_usbdewpoint indidriver)
 install(TARGETS indi_usbdewpoint RUNTIME DESTINATION bin)
 
+########### DAEnetIP3 Relay I/O Module ###############
+ 
+SET(daenetip3_SRC
+ 	${CMAKE_CURRENT_SOURCE_DIR}/drivers/auxiliary/DAEnetIP3.cpp)
+ IF (UNITY_BUILD)
+     ENABLE_UNITY_BUILD(indi_daenetip3_relay daenetip3_SRC 10 cpp)
+ ENDIF ()
+     
+add_executable(indi_daenetip3_relay ${daenetip3_SRC})
+target_link_libraries(indi_daenetip3_relay indidriver)
+install(TARGETS indi_daenetip3_relay RUNTIME DESTINATION bin)
+ 
 #####################################
 ########## WEATHER GROUP ############
 #####################################
@@ -2112,3 +2126,5 @@ endif()
 if (INDI_BUILD_QT5_CLIENT)
     message(STATUS "## INDI Qt5 Client")
 endif()
+
+

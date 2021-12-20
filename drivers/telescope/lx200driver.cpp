@@ -156,6 +156,8 @@ int HaltMovement(int fd, int direction);
 int selectTrackingMode(int fd, int trackMode);
 /* Send Pulse-Guide command (timed guide move), two valid directions can be stacked */
 int SendPulseCmd(int fd, int direction, uint32_t duration_msec);
+/* Select LittleFoot Elegance Photo tracking mode */
+int selectLFEPTrackingMode(int fd, int trackMode);
 
 /**************************************************************************
  Other Commands
